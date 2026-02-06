@@ -12,7 +12,6 @@ env:
 jobs:
   build-docker:
     runs-on: ubuntu-latest
-    environment: ACR
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
