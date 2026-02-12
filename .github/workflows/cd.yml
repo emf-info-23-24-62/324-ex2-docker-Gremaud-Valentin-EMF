@@ -1,0 +1,24 @@
+name: CD
+on:
+  push:
+   branches: [ main ]
+env:
+   ACR_LOGIN_SERVER: m324demoacrqba.azurecr.io
+jobs:
+ build:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout code
+     uses: actions/checkout@v4
+   - name: Build Docker image
+     run: docker build -t mininote:latest .
+   - name: Login into ACR
+     uses: azure/docker-login@v2
+     with:
+      login-server: ${{ env.ACR_LOGIN_SERVER }}
+      username: ${{ secrets.ACR_USERNAME }}
+      password: ${{ secrets.ACR_PASSWORD }}
+   - name: Tag and push Docker image
+     run: |
+      docker tag mininote:latest ${{ env.ACR_LOGIN_SERVER }}/mininote:latest
+      docker push ${{ env.ACR_LOGIN_SERVER }}/mininote:latest
