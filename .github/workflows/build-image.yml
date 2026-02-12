@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build -t 324-ex2-docker-gremaud-valentin-emf-mini-notes -f ./Dockerfile ./
+        run: docker build -t tripcrew -f ./Dockerfile ./
 
       - name: Login ACR
         uses: azure/docker-login@v2
@@ -28,5 +28,5 @@ jobs:
 
       - name: Push Docker image to ACR
         run: |
-          docker tag 324-ex2-docker-gremaud-valentin-emf-mini-notes:latest ${{ env.ACR_LOGIN_SERVER }}/324-ex2-docker-gremaud-valentin-emf-mini-notes:latest
-          docker push ${{ env.ACR_LOGIN_SERVER }}/324-ex2-docker-gremaud-valentin-emf-mini-notes:latest
+          docker tag tripcrew:latest ${{ env.ACR_LOGIN_SERVER }}/tripcrew:latest
+          docker push ${{ env.ACR_LOGIN_SERVER }}/tripcrew:latest
